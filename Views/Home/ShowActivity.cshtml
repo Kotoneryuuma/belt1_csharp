@@ -4,12 +4,14 @@
 <a href="/dashboard">Dashboard</a>
 <a href="/logout">Log Out</a>
 
-<h1>@Model.ActivityName</h1>
 
-<h2>Event Coordinator: @Model.UserName</h2>
-<h2>Description: @Model.Description</h2>
+<a href="/user/@Model.UserID">@Model.UserName says:</a>
+<h1>@Model.ActivityMessage</h1>
 
-<p>Participants:</p>
+
+
+
+<p>Peple who like this idea:</p>
 @{
   if (Model.Guests == null)
   {
@@ -19,7 +21,12 @@
   {
     foreach (User g in Model.Guests)
     {
-      <li>@g.UserName</li>
+
+      <a href="/user/@g.UserID">Alias:@g.Alias </a>
+      <p> Name:@g.UserName</p>
+
     }
   }
 }
+
+Dis

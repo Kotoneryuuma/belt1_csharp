@@ -1,48 +1,33 @@
 @using belt1.Models
 @model List<Display>
 
-<h3>Welcome to Dojo Activity Center</h3>
+<h3>Welcome to dashboard of Dojo Alumni Idea board </h3>
 
-<table classs="table">
-	<thead>
-        <tr>
-		<th scope="col">Activity</th>
-		<th scope="col">Date & Time</th>
-		<th scope="col">Duration</th>
-        <th scope="col">Event Coordinator</th>
-        <th scope="col">No of Participants</th>
-        <th scope="col">Actions</th>
-        </tr>
-	</thead>
-    <tbody>
-	@foreach (Display i in Model)
-	{
-		<tr>
-			<td><a href="/activity/@i.DisplayID">@i.ActivityName</td>
-			<td>@i.Date.ToString("d") & @i.Time </td>
-            <td>@i.Duration </td>
-            <td>@i.UserName </td>
-			<td>@i.Guests.Count()</td>
-            <td>
-                @if (i.IsHosting)
+
+
+
+<p><a href="/newactivity">Add Idea!</a></p>
+
+@foreach (Display i in Model)
+{
+    <p>
+    <a href="/user/@i.UserID">@i.UserName says:  </a>
+    </p>
+    <h3>@i.ActivityMessage</h3>
+    <p>
+    <a href="/join/@i.DisplayID">Like</a>
+    </p>
+    <a href="/activity/@i.DisplayID">@i.Guests.Count() people like this. </a>
+    <p>
+        @if (i.IsHosting)
                 {
                 <a href="/delete/@i.DisplayID">Delete</a>
-                <a href="/edit/@i.DisplayID">Edit</a>
+                
                 }
-                else if (!i.IsAttending)
-                {
-                <a href="/join/@i.DisplayID">Join</a>
-                }
-                else
-                {
-                <a href="/leave/@i.DisplayID">Leave</a>
-                }
-            <td>
-
-		</tr>
-	}
-    </tbody>
-</table>
-
-<p><a href="/newactivity">New Activity</a></p>
+    </p>
+    <p>
+    </p>
+    
+   
+}
 

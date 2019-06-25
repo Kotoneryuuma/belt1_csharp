@@ -58,7 +58,7 @@ using belt1.Models;
             WriteLiteral("\r\n<!-- Html の名前　（Partial で送る -->\r\n<div class=\"box\">   \r\n    ");
             EndContext();
             BeginContext(192, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "04fd29c8fb02482aaeb45a3d913d378f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e0072c37953c4e3fa8a228e1b0c5022e", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -77,7 +77,7 @@ using belt1.Models;
             WriteLiteral("\r\n </div>\r\n<div class=\"box\">\r\n<!-- Html の名前　（Partial で送る -->\r\n    ");
             EndContext();
             BeginContext(296, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "d1c1e42a3d254ef88ff99c0ba987a034", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "e80ec03b38f9451dbd5ee5e19c92b08f", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();

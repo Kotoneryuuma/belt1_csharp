@@ -9,8 +9,8 @@ using belt1.Models;
 namespace belt1.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20190625041724_project1")]
-    partial class project1
+    [Migration("20190625164810_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,16 +46,8 @@ namespace belt1.Migrations
 
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("DojoActivityName")
+                    b.Property<string>("DojoActivityMessage")
                         .IsRequired();
-
-                    b.Property<int>("Duration");
-
-                    b.Property<TimeSpan>("Time");
 
                     b.Property<DateTime>("UpdatedAt");
 
@@ -72,6 +64,8 @@ namespace belt1.Migrations
                 {
                     b.Property<int>("UserID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Alias");
 
                     b.Property<string>("Email");
 

@@ -8,7 +8,15 @@ namespace belt1.Models
         [Required]
         [MinLength(2)]
         [Display(Name = "User Name")]
+        [RegularExpression(@"^[a-zA-Z]+[ a-zA-Z-_]*$", ErrorMessage = "Use Characters only")]
         public string UserName {get;set;}
+
+        [Required]
+        [MinLength(2)]
+        [Display(Name = "Alias")]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Use only letters and numbers")]
+        public string Alias {get;set;}
+
 
 
         [Required]

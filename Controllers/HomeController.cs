@@ -8,6 +8,7 @@ using belt1.Models;
 using Microsoft.AspNetCore.Http; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 
 namespace belt1.Controllers
@@ -38,7 +39,13 @@ namespace belt1.Controllers
                 return View("Index");
 
             User newUser = new User();
+            string getInput = regData.UserName;
+            
+               
+            
             newUser.UserName = regData.UserName;
+                
+            newUser.Alias = regData.Alias;
             newUser.Email = regData.Email;
             var Hasher = new PasswordHasher<RegisterForm>();
             newUser.Password = Hasher.HashPassword(regData, regData.Password);
@@ -109,10 +116,8 @@ namespace belt1.Controllers
             {
                 Display thisDisaplay = new Display();
                 thisDisaplay.DisplayID = e.DojoActivityID;
-                thisDisaplay.ActivityName = e.DojoActivityName;
-                thisDisaplay.Date = e.Date;
-                thisDisaplay.Time = e.Time;
-                thisDisaplay.Duration = e.Duration;
+                thisDisaplay.ActivityMessage = e.DojoActivityMessage;
+                thisDisaplay.UserID = e.Creator.UserID;
                 
                 thisDisaplay.UserName = e.Creator.UserName;
                 thisDisaplay.Guests = new List<User>();
@@ -136,7 +141,7 @@ namespace belt1.Controllers
                     }
                 }
                 if (!found)
-                    thisDisaplay.IsAttending = false;
+                    thisDisaplay.IsAttending = false; 
                 AllDisplays.Add(thisDisaplay);
             }
             return View(AllDisplays);
@@ -168,17 +173,7 @@ namespace belt1.Controllers
             //     Address = FormData.Address
             // };
 
-            newActivity.DojoActivityName = FormData.Title;
-            newActivity.Time = FormData.Time;
-            DateTime Today = DateTime.Now;
-                if (FormData.Date < Today)
-                {
-                    ModelState.AddModelError("Date", "You can't make Events in the past?");
-                    return View("NewActivity");
-                }
-            newActivity.Date = FormData.Date;
-            newActivity.Duration = FormData.Duration;
-            newActivity.Description = FormData.Description;
+            newActivity.DojoActivityMessage = FormData.Message;
             newActivity.CreatedAt = DateTime.Now;
             newActivity.UpdatedAt = DateTime.Now;
             newActivity.UserID = host.UserID;
@@ -253,9 +248,9 @@ namespace belt1.Controllers
                 // object  は ディクショナリ　Activity.cs にある　Creater はIDが示しているようにActivity（単体）の　User（Creater）　Creater Objectの中には、User.cs と同じ情報（単体の）がある。
                 // Creator = 1 to many
             Display thisDisplay = new Display();
-            thisDisplay.ActivityName = thisActivity.DojoActivityName;
+            thisDisplay.UserID = thisActivity.Creator.UserID;
+            thisDisplay.ActivityMessage = thisActivity.DojoActivityMessage;
             thisDisplay.UserName = thisActivity.Creator.UserName;
-            thisDisplay.Description = thisActivity.Description;
             thisDisplay.Guests = new List<User>();
             foreach (Associate g in thisActivity.Guests)
                 thisDisplay.Guests.Add(g.User);
@@ -284,11 +279,7 @@ namespace belt1.Controllers
             DojoActivity editActivity = dbContext.DojoActivitys
                 .SingleOrDefault(u =>
                     u.DojoActivityID == id);    
-            editActivity.DojoActivityName = FormData.Title;  
-            editActivity.Time = FormData.Time;  
-            editActivity.Date = FormData.Date;
-            editActivity.Duration = FormData.Duration;
-            editActivity.Description = FormData.Description;
+            editActivity.DojoActivityMessage = FormData.Message;  
             editActivity.CreatedAt = DateTime.Now;
             editActivity.UpdatedAt = DateTime.Now;
             editActivity.UserID = host.UserID;
@@ -296,6 +287,58 @@ namespace belt1.Controllers
             
             return RedirectToAction("Dashboard");
         }
+
+        // [Route("ProducttoCategory")]
+        // [HttpPost]
+        // public IActionResult ProductToCategory(Display FormData)
+        // {
+        
+        //     Associate newAssociation = new Associate {
+        //         DojoActivityID = FormData.Associate.DojoActivityID,
+        //         UserID = FormData.Associate.UserID
+        //     };
+        //     dbContext.Assosiates.Add(newAssociation);
+        //     dbContext.SaveChanges();
+        //     return RedirectToAction("Dashboard");
+        // }
+
+//         <!-- <h2>Add Category</h2>
+
+// <form asp-action="ProductToCategory" asp-controller="Home" method="post">
+//     <label asp-for="Associate.DojoActivityID"></label>
+//     <select asp-for="Associate.DojoActivityID">
+//     @foreach (var i in Model.DojoActivitys)
+//     {
+//       <option value="@i.DojoActivityID">@i.DojoActivityName</option>
+
+//     }
+//     </select>
+//     <input type="hidden" asp-for="Associate.UserID" value="@Model.User.UserID">
+//     <button type="submit">Create</button>
+
+// </form> -->
+        [HttpGet("user/{id}")]
+        public IActionResult UserInfo(int id)
+        {
+            if (!HttpContext.Session.Keys.Contains("user"))
+                return RedirectToAction("Logout", "User");
+        
+            User thisUser = dbContext.Users
+                .Include(e => e.ActivitystoAttend)
+                .ThenInclude(att => att.DojoActivity)
+                .SingleOrDefault(e => e.UserID == id);
+                // object  は ディクショナリ　Activity.cs にある　Creater はIDが示しているようにActivity（単体）の　User（Creater）　Creater Objectの中には、User.cs と同じ情報（単体の）がある。
+                // Creator = 1 to many
+            Display thisDisplay = new Display();
+            thisDisplay.UserName = thisUser.UserName;
+            thisDisplay.Alias = thisUser.Alias;
+            thisDisplay.Email = thisUser.Email;
+
+            return View("ShowUser", thisDisplay);
+        }
+
+
+
 
         
 

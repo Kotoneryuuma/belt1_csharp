@@ -30,3 +30,5 @@
 /Users/sekiryouma/Documents/coding_dojo/C#/assingments/belt1/obj/Debug/netcoreapp2.1/belt1.dll
 /Users/sekiryouma/Documents/coding_dojo/C#/assingments/belt1/obj/Debug/netcoreapp2.1/belt1.pdb
 /Users/sekiryouma/Documents/coding_dojo/C#/assingments/belt1/obj/Debug/netcoreapp2.1/belt1.csproj.CopyComplete
+/Users/sekiryouma/Documents/coding_dojo/C#/assingments/belt1/obj/Debug/netcoreapp2.1/Razor/Views/Home/ActivityFormPartial.g.cshtml.cs
+/Users/sekiryouma/Documents/coding_dojo/C#/assingments/belt1/obj/Debug/netcoreapp2.1/Razor/Views/Home/ShowUser.g.cshtml.cs

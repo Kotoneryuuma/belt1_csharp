@@ -6,16 +6,20 @@ namespace belt1.Models
     public class Display
     {
         public int DisplayID {get;set;}
+
+        public int UserID {get;set;}
+
         public string UserName {get;set;}
 
-         public string ActivityName {get;set;}
-        public DateTime Date {get;set;}
+        public string NameUser {get;set;}
 
-        public TimeSpan Time {get;set;}
+        public string Alias {get;set;}
 
-        public int Duration {get;set;}
+         public string Email {get;set;}
 
-        public string　Description {get;set;}
+        public string ActivityMessage {get;set;}
+       
+
         public List<User> Guests {get;set;}
 
         public User Creator {get;set;}

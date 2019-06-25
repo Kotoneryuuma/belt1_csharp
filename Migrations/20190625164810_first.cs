@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace belt1.Migrations
 {
-    public partial class project1 : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,6 +15,7 @@ namespace belt1.Migrations
                     UserID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     UserName = table.Column<string>(nullable: false),
+                    Alias = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
@@ -29,11 +30,7 @@ namespace belt1.Migrations
                 {
                     DojoActivityID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DojoActivityName = table.Column<string>(nullable: false),
-                    Date = table.Column<DateTime>(nullable: false),
-                    Time = table.Column<TimeSpan>(nullable: false),
-                    Duration = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
+                    DojoActivityMessage = table.Column<string>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
                     AssociateID = table.Column<int>(nullable: false),
